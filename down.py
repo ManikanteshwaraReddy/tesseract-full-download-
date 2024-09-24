@@ -75,10 +75,12 @@ def main():
         if pdf_files:
             output_file = os.path.join(output_dir, f"Unit_{unit_id}_merged.pdf")
             merge_pdfs(pdf_files, output_file)
-            st.success("PDFs downloaded and merged successfully!")
 
             download_link = generate_download_link(output_file, f"Click here to download the merged PDF")
             st.markdown(download_link, unsafe_allow_html=True)
+
+            # Display the success message after the link is shown
+            st.success("PDFs downloaded and merged successfully!")
 
         else:
             st.warning("No PDFs found to download.")
