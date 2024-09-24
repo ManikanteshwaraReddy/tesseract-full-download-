@@ -30,7 +30,7 @@ def generate_download_link(file_path, file_label):
     return download_link
 
 def main():
-    st.title("Download and Merge PDFs from Unit")
+    st.title("Download and Merge PDFs from Tess")
     auth_key = st.text_input("Enter Authorization Key", type="password")
     unit_id = st.text_input("Enter Unit ID")
 
