@@ -33,7 +33,8 @@ def main():
     st.title("Download and Merge PDFs from Tess")
     auth_key = st.text_input("Enter Authorization Key", type="password")
     unit_id = st.text_input("Enter Unit ID")
-
+    custom_filename = st.text_input("Enter Custom Name for Merged PDF", "Merged_Document.pdf")
+    
     if st.button("Download PDFs"):
         if not auth_key or not unit_id:
             st.error("Please enter both Authorization Key and Unit ID.")
@@ -73,15 +74,13 @@ def main():
                 pdf_files.append(filepath)
 
         if pdf_files:
-            output_file = os.path.join(output_dir, f"Unit_{unit_id}_merged.pdf")
+            output_file = os.path.join(output_dir, sanitize_filename(custom_filename))
             merge_pdfs(pdf_files, output_file)
 
             download_link = generate_download_link(output_file, f"Click here to download the merged PDF")
             st.markdown(download_link, unsafe_allow_html=True)
 
-            # Display the success message after the link is shown
             st.success("PDFs downloaded and merged successfully!")
-
         else:
             st.warning("No PDFs found to download.")
 
